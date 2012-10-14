@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'haml'
+gem 'heroku'
 gem 'jquery-rails'
 gem 'json'
 gem 'mysql2'
+gem 'pg'
 gem 'rabl'
 gem 'rails', '3.2.8'
 gem 'sqlite3'
