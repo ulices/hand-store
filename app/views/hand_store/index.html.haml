@@ -1,0 +1,26 @@
+#login{ data: { role: 'page', theme: 'b' } }
+
+  .header{ data: { role: 'header' } }
+    %h1 Hand Store
+  .content{ data: { role: 'content' } }
+    %p
+      Your store in your hand
+    %p
+      = form_tag '' do
+        = email_field_tag :email, '', placeholder: 'jane_doe@mail.com'
+        = password_field_tag :password, '', placeholder: 'password'
+        = link_to 'Log In', '#', id: 'login', data: { role: 'button' }
+        %h2
+          Forget your password?
+        = link_to 'Reset here', '#reset-password'
+
+#reset-password{ data: { role: 'page', theme: 'b' } }
+  .header{ data: { role: 'header' } }
+    %h1 Reset your password
+  .content{ data: { role: 'content' } }
+    %p
+      Your forget your password, we can help you.
+    %p
+      = form_tag '' do
+        = email_field_tag :email, '', placeholder: 'Enter your email'
+        = link_to 'Send an email to reset your password', '#'
