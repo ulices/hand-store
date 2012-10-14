@@ -4,7 +4,7 @@
   .content{ data: { role: 'content' } }
     %h2 Sig In
     %p
-      = form_tag '/', id: 'form-log-in' do
+      = form_tag '#', id: 'form-log-in' do
         = email_field_tag :email, '', placeholder: 'jane_doe@mail.com'
         = password_field_tag :password, '', placeholder: 'password'
         = link_to 'Log In', '#', id: 'login-button', data: { role: 'button' }
@@ -80,7 +80,8 @@
     = form_tag '/sales/create', id: 'form-sale-create' do
       = hidden_field :products, ''
       = hidden_field :client_id, ''
-      %table.products-summary
+      %label Jane Doe
+      %table#products-summary
         %thead
           %th Name
           %th Qty
@@ -101,7 +102,12 @@
             %td Product C
             %td 1
             %td $150.00
-            %td $100.00
+            %td $150.00
+          %tr
+            %td Totals
+            %td 4
+            %td $300.00
+            %td $400.00
 
 
 #search-client{ data: { role: 'page', theme: 'b' } }
@@ -124,8 +130,8 @@
     = form_tag '/', id: 'form-search-client', data: { role: 'search' }
     %ul{ data: { role: 'listview', filter: 'true' } }
       %li
-        = link_to 'Jane Doe', '#', data: { rel: 'back' }
+        = link_to 'Product A', '#', data: { rel: 'back' }
       %li
-        = link_to 'Cindy Valencia', '#', data: { rel: 'back' }
+        = link_to 'Product B', '#', data: { rel: 'back' }
       %li
-        = link_to 'Astree Suarez', '#', data: { rel: 'back' }
+        = link_to 'Product C', '#', data: { rel: 'back' }

@@ -1,0 +1,12 @@
+table#products-summary{
+  width: 100%;
+  thead th{
+    background-color: #A4A4A4;
+  }
+  tbody tr{
+    background-color: #FAFAFA;
+    &:last-child{
+      background-color: #EFFBF5;
+    }
+  }
+}

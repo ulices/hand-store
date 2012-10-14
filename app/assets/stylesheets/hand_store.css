@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require jquery.mobile
+ *= require ./hand-store/base
  *= require_tree .
  */
