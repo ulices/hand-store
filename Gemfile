@@ -8,7 +8,6 @@ gem 'mysql2'
 gem 'pg'
 gem 'rabl'
 gem 'rails', '3.2.8'
-gem 'sqlite3'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
