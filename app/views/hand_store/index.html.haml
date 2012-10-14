@@ -73,14 +73,12 @@
   .header{ data: { role: 'header' } }
     %h1 Hand Store
   .content{ data: { role: 'content' } }
-    %label Search for
-    .search-buttons{ data: { role: 'controlgroup', type: 'horizontal', mini: 'true' }}
-      = link_to 'Client', '#search-client', data: { role: 'button', rel: 'dialog' }
-      = link_to 'Product', '#search-product', data: { role: 'button', rel: 'dialog' }
+    = label_tag '#search-clint', 'Client'
+    = link_to 'Select your client', '#search-client', data: { role: 'button', rel: 'dialog' }
+    = link_to 'Product', '#search-product', data: { role: 'button', rel: 'dialog', inline: 'true' }
     = form_tag '/sales/create', id: 'form-sale-create' do
       = hidden_field :products, ''
       = hidden_field :client_id, ''
-      %label Jane Doe
       %table#products-summary
         %thead
           %th Name
@@ -108,7 +106,7 @@
             %td 4
             %td $300.00
             %td $400.00
-
+      = link_to 'Charge', '#', id: 'create-sale', class: 'float-right' , data: { role: 'button', inline: 'true' }
 
 #search-client{ data: { role: 'page', theme: 'b' } }
   .header{ data: { role: 'header' } }
