@@ -1,26 +1,93 @@
 #login{ data: { role: 'page', theme: 'b' } }
-
   .header{ data: { role: 'header' } }
     %h1 Hand Store
   .content{ data: { role: 'content' } }
+    %h2 Sig In
     %p
-      Your store in your hand
-    %p
-      = form_tag '' do
+      = form_tag '/', id: 'log-in' do
         = email_field_tag :email, '', placeholder: 'jane_doe@mail.com'
         = password_field_tag :password, '', placeholder: 'password'
-        = link_to 'Log In', '#', id: 'login', data: { role: 'button' }
-        %h2
+        = link_to 'Log In', '#', id: 'login-button', data: { role: 'button' }
+        %h4
           Forget your password?
         = link_to 'Reset here', '#reset-password'
+    %p
+      %h4
+        Not and user?
+        = link_to 'Click here', '#signup'
 
 #reset-password{ data: { role: 'page', theme: 'b' } }
   .header{ data: { role: 'header' } }
-    %h1 Reset your password
+    %h1 Hand Store
   .content{ data: { role: 'content' } }
+    %h2 Reset your password
     %p
       Forget your password? We can help you.
     %p
       = form_tag '' do
         = email_field_tag :email, '', placeholder: 'Enter your email'
         = link_to 'Send an email to reset your password', '#'
+
+#signup{ data: { role: 'page', theme: 'b' } }
+  .header{ data: { role: 'header' } }
+    %h1 Sign Up
+  .content{ data: { role: 'content' } }
+    %h2 Create your account
+    %p
+      = form_tag '/', id: 'sign-up' do
+        = email_field_tag :email_sup, '', placeholder: 'jane_doe@mail.com'
+        = password_field_tag :password_sup, '', placeholder: 'password'
+        = link_to 'Log In', '#dashboard', id: 'signup-button', data: { role: 'button' }
+    %p
+      %h4 Already and user?
+      = link_to 'Click here', '#login'
+
+#dashboard{ data: { role: 'page', theme: 'b' } }
+  .header{ data: { role: 'header' } }
+    %h1 Hand Store
+  .content{ data: { role: 'content' } }
+    .dashboard-menu{ data: { role: 'collapsible-set', theme: 'b' } }
+      .menu-options{ data: { role: 'collapsible', :'collapsed-icon' => 'arrow-r', :'expanded-icon' => 'arrow-d' } }
+        %h2 Sales
+        %ul{ data: { role: 'listview', theme: 'c' } }
+          %li
+            = link_to 'Create', '#create-sale'
+          %li
+            = link_to 'See all', '#sales'
+      .menu-options{ data: { role: 'collapsible' } }
+        %h2 Clients
+        %ul{ data: { role: 'listview', theme: 'c' } }
+          %li
+            = link_to 'Create', '#create-client'
+          %li
+            = link_to 'See all', '#clients'
+      .menu-options{ data: { role: 'collapsible' } }
+        %h2 Reports
+        %ul{ data: { role: 'listview', theme: 'c' } }
+          %li
+            = link_to 'Sales', '#sales-report'
+          %li
+            = link_to 'Earnings report', '#earnings-report'
+
+:javascript
+  $('#login-button').click (function(event) {
+    event.preventDefault();
+    var $form = $( this ),
+        email = $form.find( 'input[name="email"]' ).val(),
+        password = $form.find( 'input[name="password"]' ).val(),
+        url = $form.attr( 'action' );
+    $.ajax({
+      type: "POST",
+      url: 'http://192.168.1.104:3000/users/sign_in.json',
+      dataType: 'jsonp',
+      data: { user: { email: email, password: password } },
+      success: function(data){
+        console.log('success');
+        console.log(data);
+      },
+      error: function(data){
+        console.log('error');
+        console.log(data);
+      }
+    });
+  });
