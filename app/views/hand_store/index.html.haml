@@ -54,14 +54,14 @@
             = link_to 'Create', '#create-sale'
           %li
             = link_to 'See all', '#sales'
-      .menu-option{ data: { role: 'collapsible' } }
+      .menu-option{ data: { role: 'collapsible', :'collapsed-icon' => 'arrow-r', :'expanded-icon' => 'arrow-d' } }
         %h2 Clients
         %ul{ data: { role: 'listview', theme: 'c' } }
           %li
             = link_to 'Create', '#create-client'
           %li
             = link_to 'See all', '#clients'
-      .menu-option{ data: { role: 'collapsible' } }
+      .menu-option{ data: { role: 'collapsible', :'collapsed-icon' => 'arrow-r', :'expanded-icon' => 'arrow-d' } }
         %h2 Reports
         %ul{ data: { role: 'listview', theme: 'c' } }
           %li
@@ -129,26 +129,3 @@
         = link_to 'Cindy Valencia', '#', data: { rel: 'back' }
       %li
         = link_to 'Astree Suarez', '#', data: { rel: 'back' }
-
-:javascript
-  $('#login-button').click (function(event) {
-    event.preventDefault();
-    var $form = $( this ),
-        email = $form.find( 'input[name="email"]' ).val(),
-        password = $form.find( 'input[name="password"]' ).val(),
-        url = $form.attr( 'action' );
-    $.ajax({
-      type: "POST",
-      url: 'http://did-store.herokuapp.com//users/sign_in.json',
-      dataType: 'jsonp',
-      data: { user: { email: email, password: password } },
-      success: function(data){
-        console.log('success');
-        console.log(data);
-      },
-      error: function(data){
-        console.log('error');
-        console.log(data);
-      }
-    });
-  });
