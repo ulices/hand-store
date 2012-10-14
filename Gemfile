@@ -18,5 +18,7 @@ end
 
 group :test, :development do
   gem 'capybara'
+  gem "cucumber-rails",        :require => false
+  gem 'database_cleaner'
   gem 'rspec-rails', '~> 2.0'
 end
