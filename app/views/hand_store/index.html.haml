@@ -4,7 +4,7 @@
   .content{ data: { role: 'content' } }
     %h2 Sig In
     %p
-      = form_tag '/', id: 'log-in' do
+      = form_tag '/', id: 'form-log-in' do
         = email_field_tag :email, '', placeholder: 'jane_doe@mail.com'
         = password_field_tag :password, '', placeholder: 'password'
         = link_to 'Log In', '#', id: 'login-button', data: { role: 'button' }
@@ -47,27 +47,88 @@
     %h1 Hand Store
   .content{ data: { role: 'content' } }
     .dashboard-menu{ data: { role: 'collapsible-set', theme: 'b' } }
-      .menu-options{ data: { role: 'collapsible', :'collapsed-icon' => 'arrow-r', :'expanded-icon' => 'arrow-d' } }
+      .menu-option{ data: { role: 'collapsible', :'collapsed-icon' => 'arrow-r', :'expanded-icon' => 'arrow-d' } }
         %h2 Sales
         %ul{ data: { role: 'listview', theme: 'c' } }
           %li
             = link_to 'Create', '#create-sale'
           %li
             = link_to 'See all', '#sales'
-      .menu-options{ data: { role: 'collapsible' } }
+      .menu-option{ data: { role: 'collapsible' } }
         %h2 Clients
         %ul{ data: { role: 'listview', theme: 'c' } }
           %li
             = link_to 'Create', '#create-client'
           %li
             = link_to 'See all', '#clients'
-      .menu-options{ data: { role: 'collapsible' } }
+      .menu-option{ data: { role: 'collapsible' } }
         %h2 Reports
         %ul{ data: { role: 'listview', theme: 'c' } }
           %li
             = link_to 'Sales', '#sales-report'
           %li
             = link_to 'Earnings report', '#earnings-report'
+
+#create-sale{ data: { role: 'page', theme: 'b' } }
+  .header{ data: { role: 'header' } }
+    %h1 Hand Store
+  .content{ data: { role: 'content' } }
+    %label Search for
+    .search-buttons{ data: { role: 'controlgroup', type: 'horizontal', mini: 'true' }}
+      = link_to 'Client', '#search-client', data: { role: 'button', rel: 'dialog' }
+      = link_to 'Product', '#search-product', data: { role: 'button', rel: 'dialog' }
+    = form_tag '/sales/create', id: 'form-sale-create' do
+      = hidden_field :products, ''
+      = hidden_field :client_id, ''
+      %table.products-summary
+        %thead
+          %th Name
+          %th Qty
+          %th Price
+          %th Total
+        %tbody
+          %tr
+            %td Product A
+            %td 2
+            %td $100.00
+            %td $200.00
+          %tr
+            %td Product B
+            %td 1
+            %td $50.00
+            %td $50.00
+          %tr
+            %td Product C
+            %td 1
+            %td $150.00
+            %td $100.00
+
+
+#search-client{ data: { role: 'page', theme: 'b' } }
+  .header{ data: { role: 'header' } }
+    %h1 Search Client
+  .content{ data: { role: 'content' } }
+    = form_tag '/', id: 'form-search-client', data: { role: 'search' }
+    %ul{ data: { role: 'listview', filter: 'true' } }
+      %li
+        = link_to 'Jane Doe', '#', data: { rel: 'back' }
+      %li
+        = link_to 'Cindy Valencia', '#', data: { rel: 'back' }
+      %li
+        = link_to 'Astree Suarez', '#', data: { rel: 'back' }
+
+#search-product{ data: { role: 'page', theme: 'b' } }
+  .header{ data: { role: 'header' } }
+    %h1 Search Product
+  .content{ data: { role: 'content' } }
+    = form_tag '/', id: 'form-search-client', data: { role: 'search' }
+    %ul{ data: { role: 'listview', filter: 'true' } }
+      %li
+        = link_to 'Jane Doe', '#', data: { rel: 'back' }
+      %li
+        = link_to 'Cindy Valencia', '#', data: { rel: 'back' }
+      %li
+        = link_to 'Astree Suarez', '#', data: { rel: 'back' }
 
 :javascript
   $('#login-button').click (function(event) {
@@ -78,7 +139,7 @@
         url = $form.attr( 'action' );
     $.ajax({
       type: "POST",
-      url: 'http://192.168.1.104:3000/users/sign_in.json',
+      url: 'http://did-store.herokuapp.com//users/sign_in',
       dataType: 'jsonp',
       data: { user: { email: email, password: password } },
       success: function(data){
