@@ -139,7 +139,7 @@
         url = $form.attr( 'action' );
     $.ajax({
       type: "POST",
-      url: 'http://did-store.herokuapp.com//users/sign_in',
+      url: 'http://did-store.herokuapp.com//users/sign_in.json',
       dataType: 'jsonp',
       data: { user: { email: email, password: password } },
       success: function(data){
